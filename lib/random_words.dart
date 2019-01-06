@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'counter.dart';
 
 // Stateful widget은 상태객체를 갖고있고 상태값이 변함에 따라 다시 그려진다
 // Stateful widget은 state 클래스 인스턴스를 받아서 사용한다
@@ -20,15 +19,14 @@ class _RandomWordState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.list),
             onPressed: _pushSaved,
           ),
-          IconButton(icon: const Icon(Icons.add), onPressed: _pushCounter)
         ],
       ),
       body: _buildSuggestions(),
@@ -43,11 +41,6 @@ class _RandomWordState extends State<RandomWords> {
         ));
   }
 
-  _pushCounter() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Counter(title: '버튼을 누르자')));
-  }
-
   Scaffold _savedItems(context) {
     final Iterable<ListTile> tiles = _saved.map((WordPair pair) {
       return ListTile(
@@ -60,7 +53,7 @@ class _RandomWordState extends State<RandomWords> {
         ListTile.divideTiles(context: context, tiles: tiles).toList();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Saved Suggestions'),
+          title: const Text('선택한 단어들'),
         ),
         body: ListView(children: divided));
   }
